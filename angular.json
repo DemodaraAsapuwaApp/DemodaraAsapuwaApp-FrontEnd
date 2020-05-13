@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "DemodaraAsapuwaApp-FrontEnd"
+    }
+  },
+  "defaultProject": "DemodaraAsapuwaApp-FrontEnd",
+  "cli": {
+    "analytics": "ab41ed90-1a02-4074-a2a6-2dc99a2b81aa"
+  }
 }
