@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "DemodaraAsapuwaApp-FrontEnd"
+    }
+  },
+  "defaultProject": "DemodaraAsapuwaApp-FrontEnd",
+  "cli": {
+    "analytics": "50ec8edb-d6de-4c9c-ada3-03b5a8a5a1f1"
+  }
 }
