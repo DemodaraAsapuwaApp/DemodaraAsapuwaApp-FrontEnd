@@ -1,0 +1,21 @@
+<mat-horizontal-stepper labelPosition="bottom" linear>
+  <mat-step label="Select Members">
+    <app-member-list></app-member-list>
+    <div>
+      <button mat-button matStepperNext type="button">Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Upload File">
+    <app-file-upload></app-file-upload>
+    <div>
+      <button mat-button matStepperPrevious type="button">Back</button>
+      <button mat-button matStepperNext type="button">Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Finish">
+    <div>
+      <button mat-button matStepperPrevious type="button">Back</button>
+      <button mat-button matStepperNext type="button">Next</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

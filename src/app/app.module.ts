@@ -10,13 +10,25 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { MainPanelComponent } from './main-panel/main-panel.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import { AppRoutingModule } from './app-routing.module';
+import { EvaluationPanelComponent } from './evaluation-panel/evaluation-panel.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MemberListComponent } from './evaluation-panel/member-list/member-list.component';
+import { FileUploadComponent } from './evaluation-panel/file-upload/file-upload.component';
+import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPanelComponent
+    MainPanelComponent,
+    EvaluationPanelComponent,
+    MemberListComponent,
+    FileUploadComponent,
+    SettingsPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +40,12 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatCheckboxModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

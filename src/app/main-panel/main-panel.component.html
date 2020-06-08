@@ -1,7 +1,8 @@
 <div class="example-container">
   <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button >
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon></button>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
     <h1 class="example-app-name">{{title}}</h1>
   </mat-toolbar>
 
@@ -9,12 +10,31 @@
 
     <mat-sidenav #sidenav [(opened)]="sideNavOpened" mode="side" position="start">
       <mat-nav-list>
-        <a mat-list-item>Item 1</a>
+        <mat-list-item  routerLink="/evaluation">
+          <mat-icon>assignment</mat-icon>
+          <span class="button-text">End Evaluation</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>alarm_add</mat-icon>
+          <span class="button-text">Mid Evaluation</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>supervisor_account</mat-icon>
+          <span class="button-text">Members</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>history</mat-icon>
+          <span class="button-text">History</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/settings">
+          <mat-icon>settings</mat-icon>
+          <span class="button-text">Settings</span>
+        </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      Main content
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

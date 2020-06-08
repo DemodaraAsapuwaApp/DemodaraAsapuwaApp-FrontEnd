@@ -22,3 +22,8 @@ h1.example-app-name {
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
   flex: 1;
 }
+
+.button-text {
+  padding-left: 1em;
+  padding-right: 1em;
+}
