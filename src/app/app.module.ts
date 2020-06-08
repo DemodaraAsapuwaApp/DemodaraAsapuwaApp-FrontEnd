@@ -20,6 +20,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MemberListComponent } from './evaluation-panel/member-list/member-list.component';
 import { FileUploadComponent } from './evaluation-panel/file-upload/file-upload.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import { SettingsPanelComponent } from './settings-panel/settings-panel.componen
     MatCheckboxModule,
     MatButtonModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     AppRoutingModule,
     MatStepperModule,
     MatFormFieldModule,
