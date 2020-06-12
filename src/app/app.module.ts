@@ -21,6 +21,7 @@ import { MemberListComponent } from './evaluation-panel/member-list/member-list.
 import { FileUploadComponent } from './evaluation-panel/file-upload/file-upload.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
 import {MatInputModule} from '@angular/material/input';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatInputModule} from '@angular/material/input';
     SettingsPanelComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,

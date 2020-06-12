@@ -1,17 +1,42 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {SystemPropertyService} from '../services/system-property.service';
+import {SystemProperty} from '../objects/system-property';
 
 @Component({
   selector: 'app-settings-panel',
   templateUrl: './settings-panel.component.html',
   styleUrls: ['./settings-panel.component.css']
 })
-export class SettingsPanelComponent {
+export class SettingsPanelComponent implements OnInit {
   masterEmail = new FormControl('', [Validators.required, Validators.email]);
   ccEmails = new FormControl('', [Validators.required, Validators.pattern('^([\\w+-.%]+@[\\w-.]+\\.[A-Za-z]{2,4},?)+$')]);
   midEvalExpDate = new FormControl('', [Validators.required, Validators.min(1), Validators.max(28)]);
   endEvalExpDate = new FormControl('', [Validators.required, Validators.min(0), Validators.max(28)]);
   toleranceDateRange = new FormControl('', [Validators.required, Validators.min(0), Validators.max(28)]);
+  private systemProperties: SystemProperty[];
+
+  constructor(private service: SystemPropertyService) {
+  }
+
+  ngOnInit(): void {
+    this.loadProperties();
+  }
+
+  private loadProperties() {
+    this.service.findAll().subscribe(p => {
+      this.systemProperties = p;
+      this.masterEmail.setValue(this.getByCode(this.service.MASTER_EMAIL).value);
+      this.ccEmails.setValue(this.getByCode(this.service.CC_EMAILS).value);
+      this.midEvalExpDate.setValue(this.getByCode(this.service.MID_EVAL_EXP_DATE).value);
+      this.endEvalExpDate.setValue(this.getByCode(this.service.END_EVAL_EXP_DATE).value);
+      this.toleranceDateRange.setValue(this.getByCode(this.service.TRANS_DATE_TOLERANCE).value);
+    });
+  }
+
+  getByCode(code: string): SystemProperty {
+    return this.systemProperties.filter(p => p.code === code)[0];
+  }
 
   getErrMasterEmail() {
     if (this.masterEmail.hasError('required')) {
@@ -39,5 +64,16 @@ export class SettingsPanelComponent {
 
   validInput(): boolean {
     return !(this.masterEmail.valid && this.ccEmails.valid && this.midEvalExpDate.valid && this.endEvalExpDate.valid && this.toleranceDateRange.valid);
+  }
+
+  save() {
+    this.getByCode(this.service.MASTER_EMAIL).value = this.masterEmail.value;
+    this.getByCode(this.service.CC_EMAILS).value = this.ccEmails.value;
+    this.getByCode(this.service.MID_EVAL_EXP_DATE).value = this.midEvalExpDate.value;
+    this.getByCode(this.service.END_EVAL_EXP_DATE).value = this.endEvalExpDate.value;
+    this.getByCode(this.service.TRANS_DATE_TOLERANCE).value = this.toleranceDateRange.value;
+    this.service.save(this.systemProperties).subscribe(s => {
+      this.loadProperties();
+    });
   }
 }
