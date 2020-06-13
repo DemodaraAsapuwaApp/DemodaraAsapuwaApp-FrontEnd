@@ -27,3 +27,12 @@ h1.example-app-name {
   padding-left: 1em;
   padding-right: 1em;
 }
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+.menu-item {
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+}

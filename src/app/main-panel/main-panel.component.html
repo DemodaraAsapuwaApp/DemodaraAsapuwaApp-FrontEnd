@@ -10,26 +10,65 @@
 
     <mat-sidenav #sidenav [(opened)]="sideNavOpened" mode="side" position="start">
       <mat-nav-list>
-        <mat-list-item  routerLink="/evaluation">
-          <mat-icon>assignment</mat-icon>
-          <span class="button-text">End Evaluation</span>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon>alarm_add</mat-icon>
-          <span class="button-text">Mid Evaluation</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/members">
-          <mat-icon>supervisor_account</mat-icon>
-          <span class="button-text">Members</span>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon>history</mat-icon>
-          <span class="button-text">History</span>
-        </mat-list-item>
-        <mat-list-item routerLink="/settings">
-          <mat-icon>settings</mat-icon>
-          <span class="button-text">Settings</span>
-        </mat-list-item>
+        <mat-accordion displayMode="flat">
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>not_started</mat-icon>
+                <span class="button-text">Evaluation</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+            <div class="menu-item">
+              <a routerLink="/evaluation" routerLinkActive="selected">
+                <mat-icon>assignment</mat-icon>
+                <span class="button-text">End Evaluation</span>
+              </a>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="menu-item">
+              <a routerLink="/evaluation" routerLinkActive="selected">
+                <mat-icon>alarm_add</mat-icon>
+                <mat-label class="button-text">Mid Evaluation</mat-label>
+              </a>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>account_box</mat-icon>
+                <span class="button-text">Members</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+            <div class="menu-item">
+              <a routerLink="/members/summary" routerLinkActive="selected">
+                <mat-icon>supervisor_account</mat-icon>
+                <mat-label class="button-text">Member Summary</mat-label>
+              </a>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="menu-item">
+              <a routerLink="/members/add" routerLinkActive="selected">
+                <mat-icon>add_box</mat-icon>
+                <mat-label class="button-text">Add Member</mat-label>
+              </a>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-expansion-panel>
+
+          <mat-list-item>
+            <mat-icon>history</mat-icon>
+            <span class="button-text">History</span>
+          </mat-list-item>
+          <mat-list-item routerLink="/settings">
+            <mat-icon>settings</mat-icon>
+            <span class="button-text">Settings</span>
+          </mat-list-item>
+        </mat-accordion>
       </mat-nav-list>
     </mat-sidenav>
 

@@ -22,9 +22,8 @@ import { FileUploadComponent } from './main-panel/evaluation-panel/file-upload/f
 import { SettingsPanelComponent } from './main-panel/settings-panel/settings-panel.component';
 import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
-import { MembersPanelComponent } from './main-panel/members-panel/members-panel.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { MemberSummaryComponent } from './main-panel/members-panel/member-summary/member-summary.component';
+import { MemberSummaryComponent } from './main-panel/member-summary/member-summary.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { MemberSummaryComponent } from './main-panel/members-panel/member-summar
     MemberListComponent,
     FileUploadComponent,
     SettingsPanelComponent,
-    MembersPanelComponent,
     MemberSummaryComponent
   ],
   imports: [
