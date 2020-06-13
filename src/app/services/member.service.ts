@@ -8,7 +8,7 @@ import {Member} from '../objects/member';
   providedIn: 'root'
 })
 export class MemberService {
-  private memberUrl = 'http://localhost:8080/member-management/members';
+  private memberUrl = `http://localhost:8080/member-management/members`;
 
   constructor(private http: HttpClient) {
   }
@@ -18,12 +18,12 @@ export class MemberService {
   }
 
   public find(id: number): Observable<Member> {
-    const url = this.memberUrl + '/{id}';
+    const url = this.memberUrl + `/${id}`;
     return this.http.get<Member>(url);
   }
 
   public modify(member: Member): Observable<any> {
-    const url = this.memberUrl + '/{member.id}';
+    const url = this.memberUrl + `/${member.id}`;
     return this.http.put<SystemProperty>(url, member);
   }
 
@@ -31,8 +31,8 @@ export class MemberService {
     return this.http.post<Member>(this.memberUrl, member);
   }
 
-  public delete(id: number): Observable<any> {
-    const url = this.memberUrl + '/{id}';
+  public delete(id: string): Observable<any> {
+    const url = this.memberUrl + `/${id}`;
     return this.http.delete<Member>(url);
   }
 }

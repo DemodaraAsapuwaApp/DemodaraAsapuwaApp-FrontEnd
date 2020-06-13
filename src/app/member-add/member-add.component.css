@@ -1,0 +1,26 @@
+.example-container {
+  margin-left: 2em;
+}
+
+.header {
+  padding-top: 15px;
+  color: mediumblue;
+}
+
+.mat-form-field {
+  margin-right: 2rem;
+}
+
+.btn-save-margin {
+  margin-top: 2rem;
+}
+
+.blue-snackbar {
+  background: #2196F3;
+}
+.green-snackbar {
+  background: #12fc03;
+}
+.red-snackbar {
+  background: #B00020;
+}

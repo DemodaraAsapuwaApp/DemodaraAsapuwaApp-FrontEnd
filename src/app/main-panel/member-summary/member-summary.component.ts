@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MemberService} from '../../services/member.service';
 import {Member} from '../../objects/member';
-import {Subscription} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-member-summary',
@@ -10,13 +11,13 @@ import {Subscription} from 'rxjs';
 })
 export class MemberSummaryComponent implements OnInit {
   public members: Member[];
-  private sub: Subscription;
 
-  constructor(private memberService: MemberService) {
+  constructor(private memberService: MemberService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.sub = this.memberService.findAll().subscribe(m => {
+    this.memberService.findAll().subscribe(m => {
       this.members = m;
     });
   }
@@ -25,7 +26,23 @@ export class MemberSummaryComponent implements OnInit {
     event.stopPropagation();
   }
 
-  delete(event: MouseEvent) {
+  delete(event: MouseEvent, id: number) {
     event.stopPropagation();
+    this.memberService.delete(id.toString()).subscribe(
+      r => {
+        this.openSnackBar('Member deleted');
+        this.memberService.findAll().subscribe(m => {
+          this.members = m;
+        });
+      },
+      (error: HttpErrorResponse) => {
+        this.openSnackBar('Error deleting user from system. ' + error.error);
+      });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 6000,
+    });
   }
 }

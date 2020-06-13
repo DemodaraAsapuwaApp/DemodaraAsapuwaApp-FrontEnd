@@ -24,6 +24,10 @@ import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MemberSummaryComponent } from './main-panel/member-summary/member-summary.component';
+import { MemberAddComponent } from './member-add/member-add.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import { MemberSummaryComponent } from './main-panel/member-summary/member-summa
     MemberListComponent,
     FileUploadComponent,
     SettingsPanelComponent,
-    MemberSummaryComponent
+    MemberSummaryComponent,
+    MemberAddComponent
   ],
   imports: [
     HttpClientModule,
@@ -54,7 +59,10 @@ import { MemberSummaryComponent } from './main-panel/member-summary/member-summa
     MatFormFieldModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

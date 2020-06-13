@@ -1,0 +1,52 @@
+<div class="example-container">
+  <h1 class="header">Add Member</h1>
+  <div>
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="ex: Kusal Kumara Liyanage" [formControl]="name" required>
+      <mat-hint>Name of the member</mat-hint>
+      <mat-error *ngIf="name.invalid">{{getErr(name)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Amount</mat-label>
+      <input matInput placeholder="ex: 8000" [formControl]="amount" required>
+      <span matPrefix>Rs&nbsp;</span>
+      <span matSuffix>.00</span>
+      <mat-hint>The amount mamber can donate monthly</mat-hint>
+      <mat-error *ngIf="amount.invalid">{{getErr(amount)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="ex: ER45UUI" [formControl]="des" required>
+      <mat-hint>The description provided in money transfer to identify transaction</mat-hint>
+      <mat-error *ngIf="des.invalid">{{getErr(des)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Transaction Date</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="tranDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>TP Number</mat-label>
+      <input matInput placeholder="ex: ER45UUI" [formControl]="tpNo" required>
+      <mat-hint>The telephone number of the member</mat-hint>
+      <mat-error *ngIf="tpNo.invalid">{{getErr(tpNo)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="ex: ER45UUI" [formControl]="email" required>
+      <mat-hint>The email address of the member</mat-hint>
+      <mat-error *ngIf="email.invalid">{{getErr(email)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="btn-save-margin">
+    <button mat-raised-button color="primary" [disabled]="inValidInput()" (click)="save()">SAVE</button>
+  </div>
+</div>

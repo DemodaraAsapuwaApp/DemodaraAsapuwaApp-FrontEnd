@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {EvaluationPanelComponent} from './main-panel/evaluation-panel/evaluation-panel.component';
 import {SettingsPanelComponent} from './main-panel/settings-panel/settings-panel.component';
 import {MemberSummaryComponent} from './main-panel/member-summary/member-summary.component';
+import {MemberAddComponent} from './member-add/member-add.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'evaluation', pathMatch: 'full'},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {
     path: 'members',
     children: [
-      {path: 'summary', component: MemberSummaryComponent}
+      {path: 'summary', component: MemberSummaryComponent},
+      {path: 'add', component: MemberAddComponent}
     ]
   },
   {path: 'settings', component: SettingsPanelComponent}
