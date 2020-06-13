@@ -6,10 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './evaluation-panel.component.html',
   styleUrls: ['./evaluation-panel.component.css']
 })
-export class EvaluationPanelComponent implements OnInit {
+export class EvaluationPanelComponent {
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

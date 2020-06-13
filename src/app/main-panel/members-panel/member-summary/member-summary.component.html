@@ -1,0 +1,57 @@
+<div class="example-container">
+  <h1 class="header">Memebership Summary</h1>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let member of members; let i = index">
+      <mat-expansion-panel-header class="right-aligned-header">
+
+        <mat-panel-title>
+          <div>
+            <mat-label>{{member.name}}</mat-label>
+          </div>
+        </mat-panel-title>
+
+        <mat-panel-description>
+          <div>
+            <mat-label class="btn-m">{{'Rs ' + member.amount + '.00'}}</mat-label>
+            <button class="btn-m" mat-raised-button color="primary" (click)="modify($event)">MODIFY</button>
+            <button class="btn-m" mat-raised-button color="primary" (click)="delete($event)">DELETE</button>
+          </div>
+        </mat-panel-description>
+
+
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Description</mat-label>
+        <input matInput [value]="member.description" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Transaction Date</mat-label>
+        <input matInput [value]="member.transactionDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>TP Number</mat-label>
+        <input matInput [value]="member.tpNo" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Email</mat-label>
+        <input matInput [value]="member.email" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Added Date</mat-label>
+        <input matInput [value]="member.addedDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="" color="primary" appearance="standard">
+        <mat-label>Last Modified Date</mat-label>
+        <input matInput [value]="member.lastModifyDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+      </mat-form-field>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

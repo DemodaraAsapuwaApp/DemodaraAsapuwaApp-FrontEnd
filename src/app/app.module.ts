@@ -13,15 +13,18 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
-import { EvaluationPanelComponent } from './evaluation-panel/evaluation-panel.component';
+import { EvaluationPanelComponent } from './main-panel/evaluation-panel/evaluation-panel.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { MemberListComponent } from './evaluation-panel/member-list/member-list.component';
-import { FileUploadComponent } from './evaluation-panel/file-upload/file-upload.component';
-import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
+import { MemberListComponent } from './main-panel/evaluation-panel/member-list/member-list.component';
+import { FileUploadComponent } from './main-panel/evaluation-panel/file-upload/file-upload.component';
+import { SettingsPanelComponent } from './main-panel/settings-panel/settings-panel.component';
 import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
+import { MembersPanelComponent } from './main-panel/members-panel/members-panel.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MemberSummaryComponent } from './main-panel/members-panel/member-summary/member-summary.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import {HttpClientModule} from '@angular/common/http';
     EvaluationPanelComponent,
     MemberListComponent,
     FileUploadComponent,
-    SettingsPanelComponent
+    SettingsPanelComponent,
+    MembersPanelComponent,
+    MemberSummaryComponent
   ],
   imports: [
     HttpClientModule,
@@ -50,7 +55,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatStepperModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

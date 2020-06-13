@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {SystemPropertyService} from '../services/system-property.service';
-import {SystemProperty} from '../objects/system-property';
+import {SystemPropertyService} from '../../services/system-property.service';
+import {SystemProperty} from '../../objects/system-property';
 
 @Component({
   selector: 'app-settings-panel',

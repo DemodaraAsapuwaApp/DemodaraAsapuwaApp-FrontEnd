@@ -23,7 +23,7 @@ export class SystemPropertyService {
   }
 
   public save(properties: SystemProperty[]) {
-    return this.http.post<SystemProperty>(this.systemPropertyUrl, properties);
+    return this.http.put<SystemProperty>(this.systemPropertyUrl, properties);
   }
 
 }
