@@ -1,8 +1,10 @@
 <mat-horizontal-stepper labelPosition="bottom" linear>
   <mat-step label="Select Members">
-    <app-member-list></app-member-list>
-    <div>
-      <button mat-button matStepperNext type="button">Next</button>
+    <app-member-list [members]="membersList"></app-member-list>
+    <div class="btn-up">
+      <button mat-raised-button color="primary" class="btn-m" matStepperNext>NEXT</button>
+      <button mat-raised-button color="primary"
+              (click)="selectAllMembers()">{{allSelected ? 'CLEAR ALL' : 'SELECT ALL'}}</button>
     </div>
   </mat-step>
   <mat-step label="Upload File">

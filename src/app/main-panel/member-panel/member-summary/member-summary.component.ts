@@ -1,29 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MemberService} from '../../../services/member.service';
 import {Member} from '../../../objects/member';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SnackBars} from '../../../shared/snack.bars';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DialogBoxes} from '../../../shared/dialog.boxes';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-member-summary',
   templateUrl: './member-summary.component.html',
   styleUrls: ['./member-summary.component.css']
 })
-export class MemberSummaryComponent implements OnInit {
+export class MemberSummaryComponent implements OnInit, OnDestroy {
   public members: Member[];
+  private sub: Subscription;
 
   constructor(private memberService: MemberService,
+              private activatedRoute: ActivatedRoute,
               private snackBars: SnackBars,
               private router: Router,
               private dialogBoxes: DialogBoxes) {
   }
 
   ngOnInit(): void {
-    this.memberService.findAll().subscribe(m => {
-      this.members = m;
+    this.sub = this.activatedRoute.data.subscribe((data: { members: Member[] }) => {
+      this.members = data.members;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   modify(event: MouseEvent, name: string) {

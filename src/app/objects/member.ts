@@ -1,5 +1,6 @@
 export class Member {
   id: number;
+  isSelected: boolean;
   name: string;
   amount: number;
   description: string;

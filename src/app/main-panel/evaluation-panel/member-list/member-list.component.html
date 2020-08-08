@@ -1,28 +1,39 @@
 <mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Nimash Dilanka</mat-panel-title>
-      <mat-panel-description>Amount: Rs.2000</mat-panel-description>
-      <mat-checkbox>Select</mat-checkbox>
+  <mat-expansion-panel *ngFor="let member of members; let i = index">
+    <mat-expansion-panel-header class="right-aligned-header">
+      <mat-panel-title><div><mat-label>{{member.name}}</mat-label></div></mat-panel-title>
+
+      <mat-panel-description>
+        <div>
+          <mat-label class="btn-m">{{'Rs ' + member.amount + '.00'}}</mat-label>
+          <mat-checkbox class="btn-m" [(ngModel)]="member.isSelected" (click)="$event.stopPropagation()">Select</mat-checkbox>
+        </div>
+      </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>
-      <mat-list>
-        <mat-list-item>Description: myDes1123   Transaction Date: 2018/128</mat-list-item>
-        <mat-list-item>TP No: 771652478 Email: nimasg@gmail.com</mat-list-item>
-      </mat-list>
-    </p>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Nimash Dilanka</mat-panel-title>
-      <mat-panel-description>Amount: Rs.2000</mat-panel-description>
-      <mat-checkbox>Select</mat-checkbox>
-    </mat-expansion-panel-header>
-    <p>
-      <mat-list>
-        <mat-list-item>Description: myDes1123   Transaction Date: 2018/128</mat-list-item>
-        <mat-list-item>TP No: 771652478 Email: nimasg@gmail.com</mat-list-item>
-      </mat-list>
-    </p>
+
+    <mat-form-field class="m-right" color="primary" appearance="standard">
+      <mat-label>Description</mat-label>
+      <input matInput [value]="member.description" disabled>
+    </mat-form-field>
+    <mat-form-field class="m-right " color="primary" appearance="standard">
+      <mat-label>Transaction Date</mat-label>
+      <input matInput [value]="member.transactionDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+    </mat-form-field>
+    <mat-form-field class="m-right " color="primary" appearance="standard">
+      <mat-label>TP Number</mat-label>
+      <input matInput [value]="member.tpNo" disabled>
+    </mat-form-field>
+    <mat-form-field class="m-right " color="primary" appearance="standard">
+      <mat-label>Email</mat-label>
+      <input matInput [value]="member.email" disabled>
+    </mat-form-field>
+    <mat-form-field class="m-right " color="primary" appearance="standard">
+      <mat-label>Added Date</mat-label>
+      <input matInput [value]="member.addedDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+    </mat-form-field>
+    <mat-form-field class="" color="primary" appearance="standard">
+      <mat-label>Last Modified Date</mat-label>
+      <input matInput [value]="member.lastModifyDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+    </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>
