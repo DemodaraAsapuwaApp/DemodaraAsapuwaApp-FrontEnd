@@ -24,7 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MemberSummaryComponent } from './main-panel/member-summary/member-summary.component';
-import { MemberAddComponent } from './member-add/member-add.component';
+import { MemberComponent } from './member/member.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -38,7 +38,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FileUploadComponent,
     SettingsPanelComponent,
     MemberSummaryComponent,
-    MemberAddComponent
+    MemberComponent
   ],
   imports: [
     HttpClientModule,

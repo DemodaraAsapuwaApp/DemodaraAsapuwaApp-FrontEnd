@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SystemProperty} from '../objects/system-property';
 import {Member} from '../objects/member';
@@ -20,6 +20,12 @@ export class MemberService {
   public find(id: number): Observable<Member> {
     const url = this.memberUrl + `/${id}`;
     return this.http.get<Member>(url);
+  }
+
+  public findByName(name: string): Observable<Member[]> {
+    let params = new HttpParams();
+    params = params.append('name', name);
+    return this.http.get<Member[]>(this.memberUrl, {params: params});
   }
 
   public modify(member: Member): Observable<any> {

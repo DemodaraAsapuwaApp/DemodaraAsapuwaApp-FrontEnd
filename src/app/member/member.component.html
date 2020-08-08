@@ -1,5 +1,5 @@
 <div class="example-container">
-  <h1 class="header">Add Member</h1>
+  <h1 class="header">{{member.id ? 'Modify' : 'Add'}} Member</h1>
   <div>
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Name</mat-label>
@@ -47,6 +47,8 @@
   </div>
 
   <div class="btn-save-margin">
-    <button mat-raised-button color="primary" [disabled]="inValidInput()" (click)="save()">SAVE</button>
+    <button mat-raised-button color="primary" [disabled]="inValidInput()"
+            (click)="save()">{{member.id ? 'MODIFY' : 'ADD'}}
+    </button>
   </div>
 </div>

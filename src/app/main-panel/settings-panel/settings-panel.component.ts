@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {SystemPropertyService} from '../../services/system-property.service';
 import {SystemProperty} from '../../objects/system-property';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings-panel',
@@ -14,9 +15,9 @@ export class SettingsPanelComponent implements OnInit {
   midEvalExpDate = new FormControl('', [Validators.required, Validators.min(1), Validators.max(28)]);
   endEvalExpDate = new FormControl('', [Validators.required, Validators.min(0), Validators.max(28)]);
   toleranceDateRange = new FormControl('', [Validators.required, Validators.min(0), Validators.max(28)]);
-  private systemProperties: SystemProperty[];
+  private systemProperties: SystemProperty[] | undefined;
 
-  constructor(private service: SystemPropertyService) {
+  constructor(private service: SystemPropertyService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -25,13 +26,18 @@ export class SettingsPanelComponent implements OnInit {
 
   private loadProperties() {
     this.service.findAll().subscribe(p => {
-      this.systemProperties = p;
-      this.masterEmail.setValue(this.getByCode(this.service.MASTER_EMAIL).value);
-      this.ccEmails.setValue(this.getByCode(this.service.CC_EMAILS).value);
-      this.midEvalExpDate.setValue(this.getByCode(this.service.MID_EVAL_EXP_DATE).value);
-      this.endEvalExpDate.setValue(this.getByCode(this.service.END_EVAL_EXP_DATE).value);
-      this.toleranceDateRange.setValue(this.getByCode(this.service.TRANS_DATE_TOLERANCE).value);
-    });
+        this.systemProperties = p;
+        this.masterEmail.setValue(this.getByCode(this.service.MASTER_EMAIL).value);
+        this.ccEmails.setValue(this.getByCode(this.service.CC_EMAILS).value);
+        this.midEvalExpDate.setValue(this.getByCode(this.service.MID_EVAL_EXP_DATE).value);
+        this.endEvalExpDate.setValue(this.getByCode(this.service.END_EVAL_EXP_DATE).value);
+        this.toleranceDateRange.setValue(this.getByCode(this.service.TRANS_DATE_TOLERANCE).value);
+      },
+      error => {
+        console.log('loading system settings failed');
+        console.log(error.message);
+        this.openSnackBar('Loading System Settings Failed.' + error.message, '');
+      });
   }
 
   getByCode(code: string): SystemProperty {
@@ -63,7 +69,9 @@ export class SettingsPanelComponent implements OnInit {
   }
 
   validInput(): boolean {
-    return !(this.masterEmail.valid && this.ccEmails.valid && this.midEvalExpDate.valid && this.endEvalExpDate.valid && this.toleranceDateRange.valid);
+    return !(this.masterEmail.valid && this.ccEmails.valid && this.midEvalExpDate.valid &&
+      this.endEvalExpDate.valid && this.toleranceDateRange.valid &&
+      this.systemProperties !== undefined);
   }
 
   save() {
@@ -73,7 +81,18 @@ export class SettingsPanelComponent implements OnInit {
     this.getByCode(this.service.END_EVAL_EXP_DATE).value = this.endEvalExpDate.value;
     this.getByCode(this.service.TRANS_DATE_TOLERANCE).value = this.toleranceDateRange.value;
     this.service.save(this.systemProperties).subscribe(s => {
-      this.loadProperties();
+        this.loadProperties();
+      },
+      error => {
+        console.log('loading system settings failed');
+        console.log(error.message);
+        this.openSnackBar('Saving System Settings Failed.' + error.message, '');
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 8000,
     });
   }
 }
