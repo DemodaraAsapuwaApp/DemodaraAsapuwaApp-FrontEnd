@@ -23,11 +23,13 @@ import { SettingsPanelComponent } from './main-panel/settings-panel/settings-pan
 import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
-import { MemberSummaryComponent } from './main-panel/member-summary/member-summary.component';
-import { MemberComponent } from './member/member.component';
+import { MemberSummaryComponent } from './main-panel/member-panel/member-summary/member-summary.component';
+import { MemberComponent } from './main-panel/member-panel/add-modify-member/member.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ConfirmDialogComponent} from './shared/confirm-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FileUploadComponent,
     SettingsPanelComponent,
     MemberSummaryComponent,
-    MemberComponent
+    MemberComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -62,7 +65,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

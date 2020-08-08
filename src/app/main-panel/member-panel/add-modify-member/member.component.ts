@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MemberService} from '../services/member.service';
-import {Member} from '../objects/member';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MemberService} from '../../../services/member.service';
+import {Member} from '../../../objects/member';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SnackBars} from '../../../shared/snack.bars';
 
 @Component({
   selector: 'app-member-add',
@@ -13,7 +13,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MemberComponent implements OnInit {
   member = new Member();
-  startDate = new Date();
   name = new FormControl('', [Validators.required]);
   des = new FormControl('', [Validators.required]);
   amount = new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]);
@@ -22,11 +21,10 @@ export class MemberComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private memberService: MemberService,
-              private snackBar: MatSnackBar,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private snackBars: SnackBars) {
   }
-
 
   ngOnInit(): void {
     const memberId: number = +this.route.snapshot.paramMap.get('id');
@@ -38,12 +36,12 @@ export class MemberComponent implements OnInit {
         this.name.setValue(m.name);
         this.des.setValue(m.description);
         this.amount.setValue(m.amount);
-        this.tranDate.setValue(m.transactionDate);
+        this.tranDate.setValue(new Date(m.transactionDate));
         this.tpNo.setValue(m.tpNo);
         this.email.setValue(m.email);
       },
       (error: HttpErrorResponse) => {
-        this.openSnackBar('Error loading user from system to mofify. ' + error.error, 'red-snackbar');
+        this.snackBars.openErrorSnackBar('Error loading add-modify-member from system to modify. ' + error.message);
       });
   }
 
@@ -75,29 +73,27 @@ export class MemberComponent implements OnInit {
     if (this.member.id > 0) {
       this.memberService.modify(this.member).subscribe(
         data => {
-          this.openSnackBar('User modified.', 'green-snackbar');
+          this.snackBars.openInfoSnackBar('Member modified.');
         },
         (error: HttpErrorResponse) => {
-          this.openSnackBar('Error modifing user in system. ' + error.error, 'red-snackbar');
+          this.snackBars.openErrorSnackBar('Error modifying add-modify-member in system. ' + error.message);
         });
     } else {
       this.memberService.add(this.member).subscribe(
         data => {
-          this.openSnackBar('User added to system.', 'green-snackbar');
+          this.snackBars.openInfoSnackBar('Member added to system. ');
           this.memberService.findByName(this.member.name).subscribe((mList: Member[]) => {
             this.router.navigate(['/members/modify', mList[0].id]);
           });
         },
         (error: HttpErrorResponse) => {
-          this.openSnackBar('Error adding user to system. ' + error.error, 'red-snackbar');
+          this.snackBars.openErrorSnackBar('Error adding add-modify-member to system. ' + error.message);
         });
     }
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 6000,
-    });
-  }
 
+  navigateToSummary() {
+    this.router.navigate(['/members/summary']);
+  }
 }

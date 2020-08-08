@@ -14,7 +14,7 @@
         <mat-panel-description>
           <div>
             <mat-label class="btn-m">{{'Rs ' + member.amount + '.00'}}</mat-label>
-            <button class="btn-m" mat-raised-button color="primary" (click)="modify($event)">MODIFY</button>
+            <button class="btn-m" mat-raised-button color="primary" (click)="modify($event, member.name)">MODIFY</button>
             <button class="btn-m" mat-raised-button color="primary" (click)="delete($event, member.id)">DELETE</button>
           </div>
         </mat-panel-description>

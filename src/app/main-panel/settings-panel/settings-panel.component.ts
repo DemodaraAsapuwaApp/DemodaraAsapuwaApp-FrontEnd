@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {SystemPropertyService} from '../../services/system-property.service';
 import {SystemProperty} from '../../objects/system-property';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpErrorResponse} from '@angular/common/http';
+import {SnackBars} from '../../shared/snack.bars';
 
 @Component({
   selector: 'app-settings-panel',
@@ -17,7 +18,8 @@ export class SettingsPanelComponent implements OnInit {
   toleranceDateRange = new FormControl('', [Validators.required, Validators.min(0), Validators.max(28)]);
   private systemProperties: SystemProperty[] | undefined;
 
-  constructor(private service: SystemPropertyService, private snackBar: MatSnackBar) {
+  constructor(private service: SystemPropertyService,
+              private snackBars: SnackBars) {
   }
 
   ngOnInit(): void {
@@ -33,10 +35,8 @@ export class SettingsPanelComponent implements OnInit {
         this.endEvalExpDate.setValue(this.getByCode(this.service.END_EVAL_EXP_DATE).value);
         this.toleranceDateRange.setValue(this.getByCode(this.service.TRANS_DATE_TOLERANCE).value);
       },
-      error => {
-        console.log('loading system settings failed');
-        console.log(error.message);
-        this.openSnackBar('Loading System Settings Failed.' + error.message, '');
+      (error: HttpErrorResponse) => {
+        this.snackBars.openErrorSnackBar('Error loading system properties from system. ' + error.message);
       });
   }
 
@@ -82,17 +82,11 @@ export class SettingsPanelComponent implements OnInit {
     this.getByCode(this.service.TRANS_DATE_TOLERANCE).value = this.toleranceDateRange.value;
     this.service.save(this.systemProperties).subscribe(s => {
         this.loadProperties();
+        this.snackBars.openInfoSnackBar('System Properties added to system. ');
       },
-      error => {
-        console.log('loading system settings failed');
-        console.log(error.message);
-        this.openSnackBar('Saving System Settings Failed.' + error.message, '');
+      (error: HttpErrorResponse) => {
+        this.snackBars.openErrorSnackBar('Error saving system properties to system. ' + error.message);
       });
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 8000,
-    });
-  }
 }
