@@ -25,7 +25,7 @@ export class MemberService {
   public findByName(name: string): Observable<Member[]> {
     let params = new HttpParams();
     params = params.append('name', name);
-    return this.http.get<Member[]>(this.memberUrl, {params: params});
+    return this.http.get<Member[]>(this.memberUrl, {params});
   }
 
   public modify(member: Member): Observable<any> {

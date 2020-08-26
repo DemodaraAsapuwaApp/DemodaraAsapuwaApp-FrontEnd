@@ -1,1 +1,39 @@
-<p>file-upload works!</p>
+<h1>Upload Bank Statement</h1>
+<input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".csv"/>
+<button class="btn-m" mat-raised-button color="primary"
+        (click)="toggleViewFormat()">{{toggleView ? "Hide Sample File Format" : "View Sample File Format"}}</button>
+<button class="btn-m" mat-raised-button color="primary" (click)="csvInput.click()">Choose a File (CSV)</button>
+<!--<label>{{fileName}}</label>-->
+
+<div class="m-t" *ngIf="toggleView">
+  <img  class="images" src="assets/bank-statement/bank-statement-format.png"/>
+</div>
+
+<h1 class="header">Transactions</h1>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="previewRecords$">
+
+    <!-- Txn Date Column -->
+    <ng-container matColumnDef="txnDate">
+      <th mat-header-cell *matHeaderCellDef> Txn Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.txnDate | date: 'yyyy:MM:dd hh:mm:ss a'}} </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Credit Column -->
+    <ng-container matColumnDef="credit">
+      <th mat-header-cell *matHeaderCellDef> Credit</th>
+      <td mat-cell *matCellDef="let element"> {{element.credit}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
