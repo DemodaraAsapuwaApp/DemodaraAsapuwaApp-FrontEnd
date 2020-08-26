@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SystemProperty} from '../objects/system-property';
 import {Member} from '../objects/member';
 
 @Injectable({
@@ -22,23 +21,17 @@ export class MemberService {
     return this.http.get<Member>(url);
   }
 
-  public findByName(name: string): Observable<Member[]> {
-    let params = new HttpParams();
-    params = params.append('name', name);
-    return this.http.get<Member[]>(this.memberUrl, {params});
-  }
-
-  public modify(member: Member): Observable<any> {
+  public modify(member: Member): Observable<number> {
     const url = this.memberUrl + `/${member.id}`;
-    return this.http.put<SystemProperty>(url, member);
+    return this.http.put<number>(url, member);
   }
 
-  public add(member: Member): Observable<any> {
-    return this.http.post<Member>(this.memberUrl, member);
+  public add(member: Member): Observable<number> {
+    return this.http.post<number>(this.memberUrl, member);
   }
 
-  public delete(id: string): Observable<any> {
+  public delete(id: number): Observable<void> {
     const url = this.memberUrl + `/${id}`;
-    return this.http.delete<Member>(url);
+    return this.http.delete<void>(url);
   }
 }

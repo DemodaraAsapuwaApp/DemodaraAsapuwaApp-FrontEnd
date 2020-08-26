@@ -2,7 +2,7 @@
   <h1 class="header">Memebership Summary</h1>
 
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let member of members; let i = index">
+    <mat-expansion-panel *ngFor="let member of members$ | async; let i = index">
       <mat-expansion-panel-header class="right-aligned-header">
 
         <mat-panel-title>
@@ -14,7 +14,7 @@
         <mat-panel-description>
           <div>
             <mat-label class="btn-m">{{'Rs ' + member.amount + '.00'}}</mat-label>
-            <button class="btn-m" mat-raised-button color="primary" (click)="modify($event, member.name)">MODIFY</button>
+            <button class="btn-m" mat-raised-button color="primary" (click)="modify($event, member.id)">MODIFY</button>
             <button class="btn-m" mat-raised-button color="primary" (click)="delete($event, member.id)">DELETE</button>
           </div>
         </mat-panel-description>

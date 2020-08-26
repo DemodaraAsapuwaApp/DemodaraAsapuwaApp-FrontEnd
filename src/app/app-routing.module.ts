@@ -4,7 +4,6 @@ import {EvaluationPanelComponent} from './main-panel/evaluation-panel/evaluation
 import {SettingsPanelComponent} from './main-panel/settings-panel/settings-panel.component';
 import {MemberSummaryComponent} from './main-panel/member-panel/member-summary/member-summary.component';
 import {MemberComponent} from './main-panel/member-panel/add-modify-member/member.component';
-import {MemberResolver} from './shared/member.resolver';
 
 const routes: Routes = [
   {path: '', redirectTo: 'evaluation', pathMatch: 'full'},
@@ -19,7 +18,7 @@ const routes: Routes = [
   {
     path: 'members',
     children: [
-      {path: 'summary', component: MemberSummaryComponent, resolve: {members: MemberResolver}},
+      {path: 'summary', component: MemberSummaryComponent},
       {path: 'add', component: MemberComponent},
       {path: 'modify/:id', component: MemberComponent}
     ]

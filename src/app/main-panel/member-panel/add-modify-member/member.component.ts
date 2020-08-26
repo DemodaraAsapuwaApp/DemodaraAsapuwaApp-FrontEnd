@@ -72,7 +72,7 @@ export class MemberComponent implements OnInit {
 
     if (this.member.id > 0) {
       this.memberService.modify(this.member).subscribe(
-        data => {
+        id => {
           this.snackBars.openInfoSnackBar('Member modified.');
         },
         (error: HttpErrorResponse) => {
@@ -80,18 +80,15 @@ export class MemberComponent implements OnInit {
         });
     } else {
       this.memberService.add(this.member).subscribe(
-        data => {
+        id => {
           this.snackBars.openInfoSnackBar('Member added to system. ');
-          this.memberService.findByName(this.member.name).subscribe((mList: Member[]) => {
-            this.router.navigate(['/members/modify', mList[0].id]);
-          });
+          this.router.navigate(['/members/modify', id]);
         },
         (error: HttpErrorResponse) => {
           this.snackBars.openErrorSnackBar('Error adding add-modify-member to system. ' + error.message);
         });
     }
   }
-
 
   navigateToSummary() {
     this.router.navigate(['/members/summary']);
