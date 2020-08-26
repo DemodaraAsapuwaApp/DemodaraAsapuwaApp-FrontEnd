@@ -4,6 +4,7 @@ import {SystemPropertyService} from '../../services/system-property.service';
 import {SystemProperty} from '../../objects/system-property';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SnackBars} from '../../shared/snack.bars';
+import {PropertyCode} from '../../shared/property.code';
 
 @Component({
   selector: 'app-settings-panel',
@@ -29,19 +30,19 @@ export class SettingsPanelComponent implements OnInit {
   private loadProperties() {
     this.service.findAll().subscribe(p => {
         this.systemProperties = p;
-        this.masterEmail.setValue(this.getByCode(this.service.MASTER_EMAIL).value);
-        this.ccEmails.setValue(this.getByCode(this.service.CC_EMAILS).value);
-        this.midEvalExpDate.setValue(this.getByCode(this.service.MID_EVAL_EXP_DATE).value);
-        this.endEvalExpDate.setValue(this.getByCode(this.service.END_EVAL_EXP_DATE).value);
-        this.toleranceDateRange.setValue(this.getByCode(this.service.TRANS_DATE_TOLERANCE).value);
+        this.masterEmail.setValue(this.getByCode(PropertyCode.MASTER_EMAIL).value);
+        this.ccEmails.setValue(this.getByCode(PropertyCode.CC_EMAILS).value);
+        this.midEvalExpDate.setValue(this.getByCode(PropertyCode.MID_EVAL_EXP_DATE).value);
+        this.endEvalExpDate.setValue(this.getByCode(PropertyCode.END_EVAL_EXP_DATE).value);
+        this.toleranceDateRange.setValue(this.getByCode(PropertyCode.TRANS_DATE_TOLERANCE).value);
       },
       (error: HttpErrorResponse) => {
         this.snackBars.openErrorSnackBar('Error loading system properties from system. ' + error.message);
       });
   }
 
-  getByCode(code: string): SystemProperty {
-    return this.systemProperties.filter(p => p.code === code)[0];
+  getByCode(code: PropertyCode): SystemProperty {
+    return this.systemProperties.filter(p => p.code === code.valueOf())[0];
   }
 
   getErrMasterEmail() {
@@ -75,11 +76,11 @@ export class SettingsPanelComponent implements OnInit {
   }
 
   save() {
-    this.getByCode(this.service.MASTER_EMAIL).value = this.masterEmail.value;
-    this.getByCode(this.service.CC_EMAILS).value = this.ccEmails.value;
-    this.getByCode(this.service.MID_EVAL_EXP_DATE).value = this.midEvalExpDate.value;
-    this.getByCode(this.service.END_EVAL_EXP_DATE).value = this.endEvalExpDate.value;
-    this.getByCode(this.service.TRANS_DATE_TOLERANCE).value = this.toleranceDateRange.value;
+    this.getByCode(PropertyCode.MASTER_EMAIL).value = this.masterEmail.value;
+    this.getByCode(PropertyCode.CC_EMAILS).value = this.ccEmails.value;
+    this.getByCode(PropertyCode.MID_EVAL_EXP_DATE).value = this.midEvalExpDate.value;
+    this.getByCode(PropertyCode.END_EVAL_EXP_DATE).value = this.endEvalExpDate.value;
+    this.getByCode(PropertyCode.TRANS_DATE_TOLERANCE).value = this.toleranceDateRange.value;
     this.service.save(this.systemProperties).subscribe(s => {
         this.loadProperties();
         this.snackBars.openInfoSnackBar('System Properties added to system. ');
