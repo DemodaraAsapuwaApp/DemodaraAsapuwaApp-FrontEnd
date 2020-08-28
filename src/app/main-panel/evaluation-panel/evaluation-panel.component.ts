@@ -12,6 +12,7 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
   public membersList: Member[];
   private sub: Subscription;
   public allSelected = false;
+  file: File;
 
   constructor(private memberService: MemberService) {
   }
@@ -35,5 +36,14 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
     } else {
       this.membersList.forEach(m => m.isSelected = false);
     }
+  }
+
+  updateFile($event: File) {
+    this.file = $event;
+  }
+
+  membersSelected() {
+    return this.membersList === undefined ||
+      (this.membersList.filter(m => m.isSelected).length === 0);
   }
 }
