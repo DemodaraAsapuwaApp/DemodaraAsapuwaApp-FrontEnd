@@ -32,6 +32,7 @@ import {ConfirmDialogComponent} from './shared/confirm-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { TransactionMatchComponent } from './main-panel/evaluation-panel/transaction-match/transaction-match.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatTableModule} from '@angular/material/table';
     SettingsPanelComponent,
     MemberSummaryComponent,
     MemberComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TransactionMatchComponent
   ],
   imports: [
     HttpClientModule,

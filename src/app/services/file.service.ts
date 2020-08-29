@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {UploadFileResponse} from '../objects/upload.file.response';
+import {HttpClient} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 import {BankRecord} from '../shared/bank.record';
 
 @Injectable({
@@ -9,6 +8,7 @@ import {BankRecord} from '../shared/bank.record';
 })
 export class FileService {
   private PreviewFileUrl = `http://localhost:8080/file-management/preview-files`;
+  public bankRecordSubject = new Subject<BankRecord[]>();
 
   constructor(private http: HttpClient) {
   }

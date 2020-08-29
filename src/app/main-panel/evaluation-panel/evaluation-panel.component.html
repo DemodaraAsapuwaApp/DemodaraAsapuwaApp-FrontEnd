@@ -8,10 +8,17 @@
     </div>
   </mat-step>
   <mat-step label="Upload File">
-    <app-file-upload (uploadedFile)="updateFile($event)"></app-file-upload>
+    <app-file-upload></app-file-upload>
     <div class="btn-up">
       <button mat-raised-button color="primary" class="btn-m" matStepperPrevious>BACK</button>
-      <button mat-raised-button color="primary" class="btn-m" [disabled]="file === undefined" matStepperNext>NEXT</button>
+      <button mat-raised-button color="primary" class="btn-m" [disabled]="bankRecordUnAvailable" matStepperNext>NEXT</button>
+    </div>
+  </mat-step>
+  <mat-step label="Match Transactions">
+    <app-transaction-match></app-transaction-match>
+    <div class="btn-up">
+      <button mat-raised-button color="primary" class="btn-m" matStepperPrevious>BACK</button>
+      <button mat-raised-button color="primary" class="btn-m" matStepperNext>NEXT</button>
     </div>
   </mat-step>
   <mat-step label="Finish">

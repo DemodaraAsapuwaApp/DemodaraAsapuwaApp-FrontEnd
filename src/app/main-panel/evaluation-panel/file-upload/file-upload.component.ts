@@ -17,7 +17,6 @@ export class FileUploadComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   toggleView: boolean;
   file: File;
-  @Output() uploadedFile = new EventEmitter<File>();
 
   constructor(private fileService: FileService,
               private snackBars: SnackBars) {
@@ -38,13 +37,13 @@ export class FileUploadComponent implements OnInit {
     ).subscribe(r => {
         this.dataSource.data = r;
         this.file = file;
-        this.uploadedFile.emit(file);
+        this.fileService.bankRecordSubject.next(r);
       },
       error => {
         this.snackBars.openErrorSnackBar('Error uploading file. ' + error.error[0]);
         this.dataSource.data = [];
         this.file = undefined;
-        this.uploadedFile.emit(undefined);
+        this.fileService.bankRecordSubject.next([]);
       }
     );
   }

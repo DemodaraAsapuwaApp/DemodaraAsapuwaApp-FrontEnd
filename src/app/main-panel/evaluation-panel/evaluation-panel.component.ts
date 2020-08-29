@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Member} from '../../objects/member';
 import {Subscription} from 'rxjs';
 import {MemberService} from '../../services/member.service';
+import {FileService} from '../../services/file.service';
 
 @Component({
   selector: 'app-evaluation-panel',
@@ -11,10 +12,13 @@ import {MemberService} from '../../services/member.service';
 export class EvaluationPanelComponent implements OnInit, OnDestroy {
   public membersList: Member[];
   private sub: Subscription;
-  public allSelected = false;
-  file: File;
+  allSelected = false;
+  bankRecordUnAvailable: boolean;
 
-  constructor(private memberService: MemberService) {
+  constructor(private memberService: MemberService, fileService: FileService) {
+    fileService.bankRecordSubject.subscribe(records => {
+      this.bankRecordUnAvailable = records === undefined || records.length < 1;
+    });
   }
 
   ngOnInit(): void {
@@ -36,10 +40,6 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
     } else {
       this.membersList.forEach(m => m.isSelected = false);
     }
-  }
-
-  updateFile($event: File) {
-    this.file = $event;
   }
 
   membersSelected() {
