@@ -13,10 +13,10 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
   public membersList: Member[];
   private sub: Subscription;
   allSelected = false;
-  bankRecordUnAvailable: boolean;
+  bankRecordUnAvailable = true;
 
-  constructor(private memberService: MemberService, fileService: FileService) {
-    fileService.bankRecordSubject.subscribe(records => {
+  constructor(private memberService: MemberService, private fileService: FileService) {
+    fileService.bankRecordSubject$.subscribe(records => {
       this.bankRecordUnAvailable = records === undefined || records.length < 1;
     });
   }
@@ -45,5 +45,14 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
   membersSelected() {
     return this.membersList === undefined ||
       (this.membersList.filter(m => m.isSelected).length === 0);
+  }
+
+  fileUplodaNxst() {
+    this.fileService.fileUploadSubject$.next(true);
+  }
+
+  selectMemNext() {
+    const selectedMambers = this.membersList.filter(m => m.isSelected);
+    this.fileService.markedMemberSubject$.next(selectedMambers);
   }
 }

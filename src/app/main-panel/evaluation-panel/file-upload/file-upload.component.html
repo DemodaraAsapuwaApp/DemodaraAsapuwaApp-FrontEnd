@@ -16,7 +16,7 @@
     <!-- Txn Date Column -->
     <ng-container matColumnDef="txnDate">
       <th mat-header-cell *matHeaderCellDef> Txn Date</th>
-      <td mat-cell *matCellDef="let element"> {{element.txnDate | date: 'yyyy:MM:dd hh:mm:ss a'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.txnDate | date: 'yyyy:MM:dd'}} </td>
     </ng-container>
 
     <!-- Description Column -->
@@ -35,5 +35,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 40, 100]" showFirstLastButtons></mat-paginator>
 </div>

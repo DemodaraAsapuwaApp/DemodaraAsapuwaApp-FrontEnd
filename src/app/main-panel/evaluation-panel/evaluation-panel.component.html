@@ -2,7 +2,7 @@
   <mat-step label="Select Members">
     <app-member-list [members]="membersList"></app-member-list>
     <div class="btn-up">
-      <button mat-raised-button color="primary" class="btn-m" [disabled]="membersSelected()" matStepperNext>NEXT</button>
+      <button mat-raised-button color="primary" class="btn-m" (click)="selectMemNext()" [disabled]="membersSelected()" matStepperNext>NEXT</button>
       <button mat-raised-button color="primary"
               (click)="selectAllMembers()">{{allSelected ? 'CLEAR ALL' : 'SELECT ALL'}}</button>
     </div>
@@ -11,7 +11,7 @@
     <app-file-upload></app-file-upload>
     <div class="btn-up">
       <button mat-raised-button color="primary" class="btn-m" matStepperPrevious>BACK</button>
-      <button mat-raised-button color="primary" class="btn-m" [disabled]="bankRecordUnAvailable" matStepperNext>NEXT</button>
+      <button mat-raised-button color="primary" class="btn-m" (click)="fileUplodaNxst()" [disabled]="bankRecordUnAvailable" matStepperNext>NEXT</button>
     </div>
   </mat-step>
   <mat-step label="Match Transactions">

@@ -37,13 +37,13 @@ export class FileUploadComponent implements OnInit {
     ).subscribe(r => {
         this.dataSource.data = r;
         this.file = file;
-        this.fileService.bankRecordSubject.next(r);
+        this.fileService.bankRecordSubject$.next(r);
       },
       error => {
         this.snackBars.openErrorSnackBar('Error uploading file. ' + error.error[0]);
         this.dataSource.data = [];
         this.file = undefined;
-        this.fileService.bankRecordSubject.next([]);
+        this.fileService.bankRecordSubject$.next([]);
       }
     );
   }

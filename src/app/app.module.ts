@@ -33,6 +33,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { TransactionMatchComponent } from './main-panel/evaluation-panel/transaction-match/transaction-match.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { TransactionMatchComponent } from './main-panel/evaluation-panel/transac
     MatSnackBarModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

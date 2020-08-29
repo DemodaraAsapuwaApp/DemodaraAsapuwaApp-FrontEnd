@@ -10,14 +10,14 @@ export class SnackBars {
 
   openInfoSnackBar(message: string) {
     this.snackBar.open(message, null, {
-      duration: 6000,
+      duration: 3000,
       panelClass: ['green-snackbar']
     });
   }
 
   openErrorSnackBar(message: string) {
     this.snackBar.open(message, null, {
-      duration: 6000,
+      duration: 3000,
       panelClass: ['red-snackbar']
     });
   }

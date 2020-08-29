@@ -1,8 +1,12 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {BankRecord} from '../../../shared/bank.record';
 import {MatPaginator} from '@angular/material/paginator';
 import {FileService} from '../../../services/file.service';
+import {combineLatest} from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
+import {Member} from '../../../objects/member';
+import {MemberService} from '../../../services/member.service';
 
 @Component({
   selector: 'app-transaction-match',
@@ -11,11 +15,21 @@ import {FileService} from '../../../services/file.service';
 })
 export class TransactionMatchComponent implements OnInit {
   dataSource = new MatTableDataSource<BankRecord>();
-  displayedColumns: string[] = ['txnDate', 'description', 'credit'];
+  displayedColumns: string[] = ['txnDate', 'description', 'credit', 'donator', 'degree'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  selectedMembers: Member[];
 
-  constructor(private fileService: FileService) {
-    fileService.bankRecordSubject.subscribe(records => {
+  constructor(private fs: FileService, private ms: MemberService) {
+    combineLatest([fs.bankRecordSubject$, fs.markedMemberSubject$, fs.fileUploadSubject$]).pipe(
+      tap(([records, selectedMembers, next]) => {
+        console.log('transactionMatch change triggered');
+        this.selectedMembers = selectedMembers;
+      }),
+      switchMap(([records, members, next]) => fs.matchTransactions(records, members)),
+      tap(members => {
+        console.log('matched Transactions: ' + JSON.stringify(members));
+      })
+    ).subscribe(records => {
       this.dataSource.data = records;
     });
   }
