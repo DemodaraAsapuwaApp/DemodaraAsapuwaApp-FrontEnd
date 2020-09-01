@@ -15,14 +15,14 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
   allSelected = false;
   bankRecordUnAvailable = true;
 
-  constructor(private memberService: MemberService, private fileService: FileService) {
-    fileService.bankRecordSubject$.subscribe(records => {
+  constructor(private ms: MemberService, private fs: FileService) {
+    fs.bankRecordSubject$.subscribe(records => {
       this.bankRecordUnAvailable = records === undefined || records.length < 1;
     });
   }
 
   ngOnInit(): void {
-    this.memberService.findAll().subscribe((m: Member[]) => {
+    this.ms.findAll().subscribe((m: Member[]) => {
       this.membersList = m;
     });
   }
@@ -47,12 +47,16 @@ export class EvaluationPanelComponent implements OnInit, OnDestroy {
       (this.membersList.filter(m => m.isSelected).length === 0);
   }
 
-  fileUplodaNxst() {
-    this.fileService.fileUploadSubject$.next(true);
+  fileUploadNext() {
+    this.fs.fileUploadSubject$.next(true);
   }
 
   selectMemNext() {
     const selectedMambers = this.membersList.filter(m => m.isSelected);
-    this.fileService.markedMemberSubject$.next(selectedMambers);
+    this.fs.markedMemberSubject$.next(selectedMambers);
+  }
+
+  matchTransNext() {
+    this.fs.transactionMatchSubject$.next(true);
   }
 }

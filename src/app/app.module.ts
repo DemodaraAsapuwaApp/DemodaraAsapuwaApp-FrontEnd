@@ -34,6 +34,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { TransactionMatchComponent } from './main-panel/evaluation-panel/transaction-match/transaction-match.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-generation/doc-generation.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {MatSelectModule} from '@angular/material/select';
     MemberSummaryComponent,
     MemberComponent,
     ConfirmDialogComponent,
-    TransactionMatchComponent
+    TransactionMatchComponent,
+    DocGenerationComponent
   ],
   imports: [
     HttpClientModule,

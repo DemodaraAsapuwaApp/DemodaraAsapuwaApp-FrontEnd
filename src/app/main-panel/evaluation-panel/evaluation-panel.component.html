@@ -18,10 +18,11 @@
     <app-transaction-match></app-transaction-match>
     <div class="btn-up">
       <button mat-raised-button color="primary" class="btn-m" matStepperPrevious>BACK</button>
-      <button mat-raised-button color="primary" class="btn-m" matStepperNext>NEXT</button>
+      <button mat-raised-button color="primary" class="btn-m" (click)="matchTransNext()" matStepperNext>NEXT</button>
     </div>
   </mat-step>
   <mat-step label="Finish">
+      <app-doc-generation></app-doc-generation>
     <div class="btn-up">
       <button mat-raised-button color="primary" class="btn-m" matStepperPrevious>BACK</button>
       <button mat-raised-button color="primary" class="btn-m" matStepperNext>NEXT</button>

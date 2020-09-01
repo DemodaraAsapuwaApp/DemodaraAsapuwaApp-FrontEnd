@@ -32,6 +32,11 @@ export class TransactionMatchComponent implements OnInit {
     ).subscribe(records => {
       this.dataSource.data = records;
     });
+
+    fs.transactionMatchSubject$.subscribe(nextClicked => {
+      const filteredRecords = this.dataSource.data.filter(r => r.memberId > 0);
+      fs.processedBankRecordSubject$.next(filteredRecords);
+    });
   }
 
   ngOnInit() {

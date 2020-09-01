@@ -14,6 +14,8 @@ export class FileService {
   public markedMemberSubject$ = new Subject<Member[]>();
   public bankRecordSubject$ = new Subject<BankRecord[]>();
   public fileUploadSubject$ = new Subject<boolean>();
+  public transactionMatchSubject$ = new Subject<boolean>();
+  public processedBankRecordSubject$ = new Subject<BankRecord[]>();
 
   constructor(private http: HttpClient) {
   }
