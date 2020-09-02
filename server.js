@@ -3,9 +3,8 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static('./dist/demodaraasapuwaapp-frontend'))
-app.get('/*', function(req, res) {
-  res.sendFile('index.html', {root: 'dist/demodaraasapuwaapp-frontend/'}
-);
+app.use(express.static('./dist/DemodaraAsapuwaApp-FrontEnd'))
+app.get('*', (req, res) => {
+  res.sendFile('.dist/DemodaraAsapuwaApp-FrontEnd/index.html');
 });
 app.listen(process.env.PORT || 8080);
