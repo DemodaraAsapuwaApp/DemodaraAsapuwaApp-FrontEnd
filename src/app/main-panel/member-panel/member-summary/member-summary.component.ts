@@ -24,7 +24,7 @@ export class MemberSummaryComponent {
     this.members$ = this.membersChange$.asObservable().pipe(
       switchMap(change => this.memberService.findAll()),
       catchError(err => {
-          this.snackBars.openErrorSnackBar('Error deleting add-modify-member from system. ' + err.message);
+          this.snackBars.openErrorSnackBar('Error fetching members from system. ' + err.error);
           return EMPTY;
         }
       )
@@ -43,7 +43,7 @@ export class MemberSummaryComponent {
         tap(ans => console.log('confirmation answer: ' + ans)),
         mergeMap(confirmed => this.memberService.delete(id)),
         catchError(err => {
-            this.snackBars.openErrorSnackBar('Error deleting add-modify-member from system. ' + err.message);
+            this.snackBars.openErrorSnackBar('Error deleting member from system. ' + err.error);
             return EMPTY;
           }
         )

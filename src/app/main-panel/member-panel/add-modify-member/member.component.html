@@ -1,11 +1,25 @@
 <div class="example-container">
   <h1 class="header">{{member.id ? 'Modify' : 'Add'}} Member</h1>
   <div>
-    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
-      <mat-label>Name</mat-label>
-      <input matInput placeholder="ex: Kusal Kumara Liyanage" [formControl]="name" required>
-      <mat-hint>Name of the member</mat-hint>
-      <mat-error *ngIf="name.invalid">{{getErr(name)}}</mat-error>
+    <mat-form-field hintLabel="Preferred name of the member" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Preferred Name</mat-label>
+      <input matInput maxlength="50" placeholder="ex: Kusal Kumara" [formControl]="preferredName" required>
+      <mat-hint align="end">{{preferredName.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="preferredName.invalid">{{getErr(preferredName)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Full name of the member" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Full Name</mat-label>
+      <input matInput maxlength="200" placeholder="ex: Mudiyanselage Kusal Kumara" [formControl]="fullName" required>
+      <mat-hint align="end">{{fullName.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="fullName.invalid">{{getErr(fullName)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="NIC no of the member" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>NIC Number</mat-label>
+      <input matInput maxlength="50" placeholder="ex: 9356789v" [formControl]="nicNo" required>
+      <mat-hint align="end">{{nicNo.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="nicNo.invalid">{{getErr(fullName)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
@@ -33,17 +47,64 @@
     </mat-form-field>
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker2" [formControl]="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-hint>Date of bith of the member</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Membership Date</mat-label>
+      <input matInput [matDatepicker]="picker3" [formControl]="membershipDate">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+      <mat-hint>The membership starting date of the member</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>TP Number</mat-label>
-      <input matInput placeholder="ex: ER45UUI" [formControl]="tpNo" required>
+      <input matInput placeholder="ex: +94771658798" [formControl]="tpNo" required>
       <mat-hint>The telephone number of the member</mat-hint>
       <mat-error *ngIf="tpNo.invalid">{{getErr(tpNo)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Email</mat-label>
-      <input matInput placeholder="ex: ER45UUI" [formControl]="email" required>
+      <input matInput placeholder="ex: kusal@gmail.com" [formControl]="email" required>
       <mat-hint>The email address of the member</mat-hint>
       <mat-error *ngIf="email.invalid">{{getErr(email)}}</mat-error>
+    </mat-form-field>
+
+    <h3 class="sub-header">Address</h3>
+
+    <mat-form-field hintLabel="Unit No/Home No of member's address" color="primary" appearance="standard"
+                    [style.width.em]=20>
+      <mat-label>Unit No/Home No</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 32/345" [formControl]="unitNo" required>
+      <mat-hint align="end">{{unitNo.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="unitNo.invalid">{{getErr(unitNo)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Street of member's address" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Street</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 2nd Lane, Demodara" [formControl]="street" required>
+      <mat-hint align="end">{{street.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="street.invalid">{{getErr(street)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Town of member's address" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Town</mat-label>
+      <input matInput maxlength="100" placeholder="ex: Rathnapura" [formControl]="town" required>
+      <mat-hint align="end">{{town.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="town.invalid">{{getErr(town)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Country of member's address" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Country</mat-label>
+      <input matInput maxlength="100" placeholder="ex: Srilanka" [formControl]="country" required>
+      <mat-hint align="end">{{country.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="country.invalid">{{getErr(country)}}</mat-error>
     </mat-form-field>
   </div>
 

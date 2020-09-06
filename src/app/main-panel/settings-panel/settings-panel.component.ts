@@ -37,7 +37,7 @@ export class SettingsPanelComponent implements OnInit {
         this.toleranceDateRange.setValue(this.getByCode(PropertyCode.TRANS_DATE_TOLERANCE).value);
       },
       (error: HttpErrorResponse) => {
-        this.snackBars.openErrorSnackBar('Error loading system properties from system. ' + error.message);
+        this.snackBars.openErrorSnackBar('Error loading system properties from system. ' + error.error);
       });
   }
 
@@ -86,7 +86,7 @@ export class SettingsPanelComponent implements OnInit {
         this.snackBars.openInfoSnackBar('System Properties added to system. ');
       },
       (error: HttpErrorResponse) => {
-        this.snackBars.openErrorSnackBar('Error saving system properties to system. ' + error.message);
+        this.snackBars.openErrorSnackBar('Error saving system properties to system. ' + error.error);
       });
   }
 

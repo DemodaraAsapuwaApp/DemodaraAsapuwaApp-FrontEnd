@@ -30,7 +30,7 @@ export class DocGenerationComponent implements OnInit {
         const recordMap: Map<number, BankRecord[]> = this.groupBy<number, BankRecord>(records, (r: BankRecord) => r.memberId);
         return selectedMembers.map<SummaryEntry>(m => ({
           memberId: m.id,
-          memberName: m.name,
+          memberName: m.preferredName,
           amount: (recordMap.has(m.id) ? recordMap.get(m.id) : []).reduce((total, brecord) => {
             return total + brecord.cr;
           }, 0),

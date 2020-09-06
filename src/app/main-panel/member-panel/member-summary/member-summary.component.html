@@ -1,5 +1,5 @@
 <div class="example-container">
-  <h1 class="header">Memebership Summary</h1>
+  <h1 class="header">Membership Summary</h1>
 
   <mat-accordion>
     <mat-expansion-panel *ngFor="let member of members$ | async; let i = index">
@@ -7,7 +7,7 @@
 
         <mat-panel-title>
           <div>
-            <mat-label>{{member.name}}</mat-label>
+            <mat-label>{{member.preferredName}}</mat-label>
           </div>
         </mat-panel-title>
 
@@ -23,6 +23,16 @@
       </mat-expansion-panel-header>
 
       <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Full Name</mat-label>
+        <input matInput [value]="member.fullName" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>NIC No</mat-label>
+        <input matInput [value]="member.nicNo" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
         <mat-label>Description</mat-label>
         <input matInput [value]="member.description" disabled>
       </mat-form-field>
@@ -33,6 +43,16 @@
       </mat-form-field>
 
       <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [value]="member.dob | date: 'yyyy:MM:dd'" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Membership Date</mat-label>
+        <input matInput [value]="member.membershipDate | date: 'yyyy:MM:dd'" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
         <mat-label>TP Number</mat-label>
         <input matInput [value]="member.tpNo" disabled>
       </mat-form-field>
@@ -40,6 +60,26 @@
       <mat-form-field class="m-right " color="primary" appearance="standard">
         <mat-label>Email</mat-label>
         <input matInput [value]="member.email" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Unit No</mat-label>
+        <input matInput [value]="member.address?.unitNo" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Street</mat-label>
+        <input matInput [value]="member.address?.street" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Town</mat-label>
+        <input matInput [value]="member.address?.town" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="m-right" color="primary" appearance="standard">
+        <mat-label>Country</mat-label>
+        <input matInput [value]="member.address?.country" disabled>
       </mat-form-field>
 
       <mat-form-field class="m-right " color="primary" appearance="standard">

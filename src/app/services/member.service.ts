@@ -8,12 +8,8 @@ import {Member} from '../objects/member';
 })
 export class MemberService {
   private memberUrl = `http://localhost:8080/member-management/members`;
-  public EMPTY_MEMBER: Member;
 
   constructor(private http: HttpClient) {
-    this.EMPTY_MEMBER = new Member();
-    this.EMPTY_MEMBER.id = 0;
-    this.EMPTY_MEMBER.name = 'NONE';
   }
 
   public findAll(): Observable<Member[]> {
