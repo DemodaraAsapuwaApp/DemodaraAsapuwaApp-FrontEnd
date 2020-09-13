@@ -11,6 +11,7 @@ export class Member {
   transactionDate: Date;
   dob: Date;
   membershipDate: Date;
+  membershipId: string;
   tpNo: string;
   email: string;
   addedDate: Date;

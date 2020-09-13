@@ -20,9 +20,11 @@ export class FileService {
   constructor(private http: HttpClient) {
   }
 
-  public previewFile(file: File): Observable<BankRecord[]> {
+  public previewFile(file: File, month: number, year: number): Observable<BankRecord[]> {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('month', month.toString());
+    formData.append('year', year.toString());
     return this.http.post<BankRecord[]>(this.previewFileUrl, formData);
   }
 

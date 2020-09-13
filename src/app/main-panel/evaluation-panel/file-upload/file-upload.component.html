@@ -6,7 +6,20 @@
 <label>{{file?.name}}</label>
 
 <div class="m-t" *ngIf="toggleView">
-  <img  class="images" src="assets/bank-statement/bank-statement-format.png"/>
+  <img class="images" src="assets/bank-statement/bank-statement-format.png"/>
+</div>
+
+<div class="m-t">
+  <mat-label class="btn-m">Processing Month</mat-label>
+  <mat-form-field appearance="fill">
+    <mat-label>Month and Year</mat-label>
+    <input matInput [matDatepicker]="dp" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                    (monthSelected)="chosenMonthHandler($event, dp)"
+                    panelClass="example-month-picker">
+    </mat-datepicker>
+  </mat-form-field>
 </div>
 
 <h1 class="header">Transactions</h1>

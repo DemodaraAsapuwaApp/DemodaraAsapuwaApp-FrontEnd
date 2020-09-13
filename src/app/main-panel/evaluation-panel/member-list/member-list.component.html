@@ -6,6 +6,7 @@
 
       <mat-panel-description>
         <div>
+          <mat-label class="btn-m">{{'Membership ID: ' + member.membershipId}}</mat-label>
           <mat-label class="btn-m">{{'Rs ' + member.amount + '.00'}}</mat-label>
           <mat-checkbox class="btn-m" [(ngModel)]="member.isSelected" (click)="$event.stopPropagation()">Select</mat-checkbox>
         </div>

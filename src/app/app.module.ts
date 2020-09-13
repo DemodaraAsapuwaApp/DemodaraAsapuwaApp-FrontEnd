@@ -35,6 +35,7 @@ import {MatTableModule} from '@angular/material/table';
 import { TransactionMatchComponent } from './main-panel/evaluation-panel/transaction-match/transaction-match.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-generation/doc-generation.component';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-genera
     MatDialogModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMomentDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

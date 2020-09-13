@@ -8,6 +8,13 @@
       <mat-error *ngIf="preferredName.invalid">{{getErr(preferredName)}}</mat-error>
     </mat-form-field>
 
+    <mat-form-field hintLabel="Membership Numebr of the member" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Membership Number</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 00457895MM" [formControl]="membershipId" required>
+      <mat-hint align="end">{{membershipId.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="membershipId.invalid">{{getErr(membershipId)}}</mat-error>
+    </mat-form-field>
+
     <mat-form-field hintLabel="Full name of the member" color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Full Name</mat-label>
       <input matInput maxlength="200" placeholder="ex: Mudiyanselage Kusal Kumara" [formControl]="fullName" required>

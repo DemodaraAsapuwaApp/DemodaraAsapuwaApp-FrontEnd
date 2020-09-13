@@ -15,6 +15,7 @@ import {Address} from '../../../objects/address';
 export class MemberComponent implements OnInit {
   member = new Member();
   preferredName = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+  membershipId = new FormControl('', [Validators.required, Validators.maxLength(200)]);
   fullName = new FormControl('', [Validators.required, Validators.maxLength(200)]);
   nicNo = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   amount = new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]);
@@ -43,6 +44,7 @@ export class MemberComponent implements OnInit {
     this.memberService.find(memberId).subscribe(m => {
         this.member = m;
         this.preferredName.setValue(m.preferredName);
+        this.membershipId.setValue(m.membershipId);
         this.fullName.setValue(m.fullName);
         this.nicNo.setValue(m.nicNo);
         this.amount.setValue(m.amount);
@@ -79,13 +81,14 @@ export class MemberComponent implements OnInit {
   }
 
   inValidInput() {
-    return this.preferredName.invalid || this.fullName.invalid || this.nicNo.invalid || this.amount.invalid || this.des.invalid
-      || this.tranDate.invalid || this.dob.invalid || this.membershipDate.invalid || this.tpNo.invalid || this.email.invalid
-      || this.unitNo.invalid || this.street.invalid || this.town.invalid || this.country.invalid;
+    return this.preferredName.invalid || this.membershipId.invalid || this.fullName.invalid || this.nicNo.invalid || this.amount.invalid
+      || this.des.invalid || this.tranDate.invalid || this.dob.invalid || this.membershipDate.invalid || this.tpNo.invalid
+      || this.email.invalid || this.unitNo.invalid || this.street.invalid || this.town.invalid || this.country.invalid;
   }
 
   save() {
     this.member.preferredName = this.preferredName.value;
+    this.member.membershipId = this.membershipId.value;
     this.member.fullName = this.fullName.value;
     this.member.nicNo = this.nicNo.value;
     this.member.amount = this.amount.value;

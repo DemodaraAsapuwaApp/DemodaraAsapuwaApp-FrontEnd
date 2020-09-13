@@ -28,7 +28,7 @@
           <mat-label>Member's name</mat-label>
           <mat-select [(ngModel)]="element.memberId" name="food">
             <mat-option value="0">None</mat-option>
-            <mat-option *ngFor="let member of selectedMembers" [value]="member.id">{{member.name}}</mat-option>
+            <mat-option *ngFor="let member of selectedMembers" [value]="member.id">{{member.preferredName}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
