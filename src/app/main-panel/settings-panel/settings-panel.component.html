@@ -1,6 +1,5 @@
 <div class="example-container">
   <h1 class="header">User Details</h1>
-
   <div>
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Master Email</mat-label>
@@ -8,7 +7,6 @@
       <mat-hint>The email of the officer using app</mat-hint>
       <mat-error *ngIf="masterEmail.invalid">{{getErrMasterEmail()}}</mat-error>
     </mat-form-field>
-
     <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>CC Emails</mat-label>
       <input matInput placeholder="xxx@example.com,yyy@example@com,zzz@example.com" [formControl]="ccEmails" required>
@@ -17,9 +15,7 @@
     </mat-form-field>
   </div>
 
-
   <h1 class="header" [style.padding-top.px]=45>Notifications</h1>
-
   <div>
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Mid Evaluation Expiration Date</mat-label>
@@ -30,7 +26,6 @@
       </mat-hint>
       <mat-error *ngIf="midEvalExpDate.invalid">{{getErrEvalExpDate(midEvalExpDate)}}</mat-error>
     </mat-form-field>
-
     <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>End Evaluation Expiration Date</mat-label>
       <input matInput placeholder="25" [formControl]="endEvalExpDate" required>
@@ -42,9 +37,7 @@
     </mat-form-field>
   </div>
 
-
   <h1 class="header" [style.padding-top.px]=45>Smart Match</h1>
-
   <div>
     <mat-label>Transaction Date Tolerance</mat-label>
     <mat-form-field [style.padding-left.em]=12 class="padding-left-4em" color="primary" appearance="standard"
@@ -55,7 +48,40 @@
     </mat-form-field>
   </div>
 
-  <div>
-    <button mat-raised-button color="primary" [disabled]="validInput()" (click)="save()">SAVE</button>
+  <h1 class="header">Payment Reasons</h1>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let reason of settingResponse?.paymentReasonList; let i = index">
+      <mat-expansion-panel-header class="right-aligned-header">
+        <mat-panel-title>
+          <div>
+            <mat-label>{{reason.value}}</mat-label>
+            <button *ngIf="reason.id === -1" color="primary" mat-button>new entry</button>
+            <button *ngIf="reason.deletionMarked" color="warn" mat-button>maked for deletion</button>
+          </div>
+        </mat-panel-title>
+
+        <mat-panel-description>
+          <div>
+            <mat-label class="btn-m">{{'Code: ' + reason.code}}</mat-label>
+            <button class="btn-m" mat-raised-button color="primary" (click)="deleteReason($event, reason.id)">
+              {{reason.deletionMarked ? 'UNDO DELETE' : 'DELETE'}}</button>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="m-right " color="primary" appearance="standard">
+        <mat-label>Added Date</mat-label>
+        <input matInput [value]="reason.addedDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+      </mat-form-field>
+      <mat-form-field class="" color="primary" appearance="standard">
+        <mat-label>Last Modified Date</mat-label>
+        <input matInput [value]="reason.lastModifyDate | date: 'yyyy:MM:dd hh:mm:ss a'" disabled>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="m-t">
+    <button mat-raised-button class="btn-m" color="primary" [disabled]="validInput()" (click)="save()">SAVE ALL</button>
+    <button mat-raised-button color="primary" (click)="addReason()">ADD REASON</button>
   </div>
 </div>

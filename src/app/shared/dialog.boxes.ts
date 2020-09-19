@@ -3,6 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 import {ConfirmDialogComponent, DialogData} from './confirm-dialog.component';
 import {takeWhile, tap} from 'rxjs/operators';
+import {AddReasonDialogComponent, AddReasonDialogData} from './add-reason-dialog.component';
+import {PaymentReason} from '../objects/payment-reason';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,21 @@ export class DialogBoxes {
     return dialogRef.afterClosed().pipe(
       tap(k => console.log('dialogref value: ' + k)),
       takeWhile(val => val === true)
+    );
+  }
+
+  addReasonDialog(title: string, paymentReasons: PaymentReason[]): Observable<AddReasonDialogData> {
+    const dialogData = new AddReasonDialogData();
+    dialogData.title = title;
+    dialogData.existingReasons = paymentReasons;
+    const dialogRef = this.dialog.open<AddReasonDialogComponent, AddReasonDialogData, AddReasonDialogData>(AddReasonDialogComponent, {
+      width: '400px',
+      data: dialogData
+    });
+    return dialogRef.afterClosed().pipe(
+      tap(k => console.log('dialogref value: ' + JSON.stringify(k))),
+      takeWhile(val => (typeof val !== 'undefined') &&
+        (typeof val.code !== 'undefined') && val.code.trim().length !== 0)
     );
   }
 }
