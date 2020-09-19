@@ -37,7 +37,6 @@ import {MatSelectModule} from '@angular/material/select';
 import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-generation/doc-generation.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {AddReasonDialogComponent} from './shared/add-reason-dialog.component';
-import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -81,8 +80,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatMomentDateModule,
-    MatBadgeModule
+    MatMomentDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
