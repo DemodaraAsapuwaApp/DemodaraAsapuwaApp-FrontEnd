@@ -37,6 +37,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-generation/doc-generation.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {AddReasonDialogComponent} from './shared/add-reason-dialog.component';
+import {MemAnnDialogComponent} from './shared/mem-ann-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {AddReasonDialogComponent} from './shared/add-reason-dialog.component';
     MemberComponent,
     ConfirmDialogComponent,
     AddReasonDialogComponent,
+    MemAnnDialogComponent,
     TransactionMatchComponent,
     DocGenerationComponent
   ],

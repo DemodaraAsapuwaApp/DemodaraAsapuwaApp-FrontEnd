@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-form-field hintLabel="Unique code for payment reason" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Code</mat-label>
+      <input matInput maxlength="200" placeholder="ex: DARMA_SHALAWA" [formControl]="code" required>
+      <mat-hint align="end">{{code.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="code.invalid">{{getErr(code)}}</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field hintLabel="Unique name for payment reason" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Value</mat-label>
+      <input matInput maxlength="200" placeholder="ex: Darma Shalawa Maintenance" [formControl]="value" required>
+      <mat-hint align="end">{{value.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="value.invalid">{{getErr(value)}}</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [disabled]="isInvalid()" (click)="add($event)">ADD</button>
+  <button mat-button (click)="cancel($event)" cdkFocusInitial>CANCEL</button>
+</div>

@@ -4,14 +4,16 @@
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Master Email</mat-label>
       <input matInput placeholder="xxx@example.com" [formControl]="masterEmail" required>
+      <mat-hint align="end">{{masterEmail.value?.length || 0}}/200</mat-hint>
       <mat-hint>The email of the officer using app</mat-hint>
-      <mat-error *ngIf="masterEmail.invalid">{{getErrMasterEmail()}}</mat-error>
+      <mat-error *ngIf="masterEmail.invalid">{{getErr(masterEmail)}}</mat-error>
     </mat-form-field>
     <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>CC Emails</mat-label>
       <input matInput placeholder="xxx@example.com,yyy@example@com,zzz@example.com" [formControl]="ccEmails" required>
+      <mat-hint align="end">{{ccEmails.value?.length || 0}}/200</mat-hint>
       <mat-hint>The emails of other officers in society</mat-hint>
-      <mat-error *ngIf="ccEmails.invalid">{{getErrCcEmails()}}</mat-error>
+      <mat-error *ngIf="ccEmails.invalid">{{getErr(ccEmails)}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -24,7 +26,7 @@
         until {{midEvalExpDate.value > 0 ? midEvalExpDate.value : 'given date'}}, a notification will be sent to master
         email
       </mat-hint>
-      <mat-error *ngIf="midEvalExpDate.invalid">{{getErrEvalExpDate(midEvalExpDate)}}</mat-error>
+      <mat-error *ngIf="midEvalExpDate.invalid">{{getErr(midEvalExpDate)}}</mat-error>
     </mat-form-field>
     <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>End Evaluation Expiration Date</mat-label>
@@ -33,7 +35,50 @@
         until {{endEvalExpDate.value > 0 ? endEvalExpDate.value : 'given date'}}, a notification will be sent to master
         email
       </mat-hint>
-      <mat-error *ngIf="endEvalExpDate.invalid">{{getErrEvalExpDate(endEvalExpDate)}}</mat-error>
+      <mat-error *ngIf="endEvalExpDate.invalid">{{getErr(endEvalExpDate)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Default Donation Reason</mat-label>
+      <input matInput maxlength="200" placeholder="ex: Monthly Donation" [formControl]="defDonateReason" required>
+      <mat-hint align="end">{{defDonateReason.value?.length || 0}}/200</mat-hint>
+      <mat-hint>'{{defDonateReason.value?.length > 0 ? defDonateReason.value : 'given reason'}}' will be added to
+        monthly
+        generated documents as the donation reason
+      </mat-hint>
+      <mat-error *ngIf="defDonateReason.invalid">{{getErr(defDonateReason)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <h1 class="header" [style.padding-top.px]=45>Account Details</h1>
+  <div>
+    <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Account Name</mat-label>
+      <input matInput maxlength="200" placeholder="ex: Sri Pada Senasuna" [formControl]="accName" required>
+      <mat-hint align="end">{{accName.value?.length || 0}}/200</mat-hint>
+      <mat-hint>account name which use for donations</mat-hint>
+      <mat-error *ngIf="accName.invalid">{{getErr(accName)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Account Number</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 0012559202006595" [formControl]="accNo" required>
+      <mat-hint align="end">{{accNo.value?.length || 0}}/200</mat-hint>
+      <mat-hint>account name which use for donations</mat-hint>
+      <mat-error *ngIf="accNo.invalid">{{getErr(accNo)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Bank Name</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 0012559202006595" [formControl]="bankName" required>
+      <mat-hint align="end">{{bankName.value?.length || 0}}/200</mat-hint>
+      <mat-hint>account name which use for donations</mat-hint>
+      <mat-error *ngIf="bankName.invalid">{{getErr(bankName)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="padding-left-4em" color="primary" appearance="standard" [style.width.em]=20>
+      <mat-label>Bank Branch</mat-label>
+      <input matInput maxlength="200" placeholder="ex: 0012559202006595" [formControl]="bankBranch" required>
+      <mat-hint align="end">{{bankBranch.value?.length || 0}}/200</mat-hint>
+      <mat-hint>account name which use for donations</mat-hint>
+      <mat-error *ngIf="bankBranch.invalid">{{getErr(bankBranch)}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -44,7 +89,7 @@
                     [style.width.em]=20>
       <mat-label>Date Range</mat-label>
       <input matInput placeholder="3" [formControl]="toleranceDateRange" required>
-      <mat-error *ngIf="toleranceDateRange.invalid">{{getErrEvalExpDate(toleranceDateRange)}}</mat-error>
+      <mat-error *ngIf="toleranceDateRange.invalid">{{getErr(toleranceDateRange)}}</mat-error>
     </mat-form-field>
   </div>
 

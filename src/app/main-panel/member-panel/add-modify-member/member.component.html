@@ -47,7 +47,7 @@
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Transaction Date</mat-label>
-      <input matInput [matDatepicker]="picker" [formControl]="tranDate">
+      <input matInput [matDatepicker]="picker" [formControl]="tranDate" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-hint>The transaction date which in money transfer occurs recursively</mat-hint>
@@ -55,15 +55,15 @@
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Date of Birth</mat-label>
-      <input matInput [matDatepicker]="picker2" [formControl]="dob">
+      <input matInput [matDatepicker]="picker2" [formControl]="dob" required>
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
-      <mat-hint>Date of bith of the member</mat-hint>
+      <mat-hint>Date of birth of the member</mat-hint>
     </mat-form-field>
 
     <mat-form-field color="primary" appearance="standard" [style.width.em]=20>
       <mat-label>Membership Date</mat-label>
-      <input matInput [matDatepicker]="picker3" [formControl]="membershipDate">
+      <input matInput [matDatepicker]="picker3" [formControl]="membershipDate" required>
       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
       <mat-datepicker #picker3></mat-datepicker>
       <mat-hint>The membership starting date of the member</mat-hint>
@@ -118,6 +118,9 @@
   <div class="btn-save-margin">
     <button class="btn-m" mat-raised-button color="primary" [disabled]="inValidInput()"
             (click)="save()">{{member.id ? 'MODIFY' : 'ADD'}}
+    </button>
+    <button class="btn-m" mat-raised-button color="primary"
+            (click)="navigateToSummary()">MEMBERSHIP SUMMARY
     </button>
     <button class="btn-m" mat-raised-button color="primary"
             (click)="navigateToSummary()">MEMBERSHIP SUMMARY
