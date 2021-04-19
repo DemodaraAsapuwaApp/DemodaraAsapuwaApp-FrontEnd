@@ -5,7 +5,11 @@ import {Member} from '../../../objects/member';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SnackBars} from '../../../shared/snack.bars';
-import {Address} from '../../../objects/address';
+import {catchError, mergeMap, tap} from 'rxjs/operators';
+import {EMPTY} from 'rxjs';
+import {DialogBoxes} from '../../../shared/dialog.boxes';
+import {FileService} from '../../../services/file.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-member-add',
@@ -31,9 +35,11 @@ export class MemberComponent implements OnInit {
   country = new FormControl('', [Validators.required, Validators.maxLength(100)]);
 
   constructor(private memberService: MemberService,
+              private fileService: FileService,
               private route: ActivatedRoute,
               private router: Router,
-              private snackBars: SnackBars) {
+              private snackBars: SnackBars,
+              private dialogBoxes: DialogBoxes) {
   }
 
   ngOnInit(): void {
@@ -125,5 +131,27 @@ export class MemberComponent implements OnInit {
 
   navigateToSummary() {
     this.router.navigate(['/members/summary']);
+  }
+
+  generateDoc() {
+    this.dialogBoxes.genConfrmDocDialog('Generate Membership Confirmation')
+      .pipe(
+        tap(ans => console.log('membership doc answer: ' + JSON.stringify(ans))),
+        // mergeMap(ans => this.fileService.genConfirmDoc(this.member.id, ans.download,
+        //   ans.sendToMember, ans.sendToSystem, ans.issueDate.toString())),
+        mergeMap(ans => this.fileService.genConfirmDoc(this.member.id, 'membershipAnnouncement_' + this.member.preferredName + '.docx',
+          ans.download, ans.sendToMember, ans.sendToSystem, ans.issueDate)),
+        catchError(err => {
+            console.log('Error creating membership confirmation document.' + JSON.stringify(err));
+            this.snackBars.openErrorSnackBar('Error creating membership confirmation document. ' + JSON.stringify(err));
+            return EMPTY;
+          }
+        )
+      ).subscribe(blob => {
+        console.log(JSON.stringify(blob));
+        saveAs(blob, 'membershipAnnouncement_' + this.member.preferredName + '.docx');
+        this.snackBars.openInfoSnackBar('Document Generated');
+      }
+    );
   }
 }

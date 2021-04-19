@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {BankRecord} from '../shared/bank.record';
 import {Member} from '../objects/member';
@@ -11,6 +11,7 @@ import {TransMatch} from '../shared/trans.match';
 export class FileService {
   private previewFileUrl = `http://localhost:8080/file-management/preview-files`;
   private matchTransactionsUrl = `http://localhost:8080/file-management/match-transactions`;
+  private genConfirmDocUrl = `http://localhost:8080/file-management/files/gen-doc`;
   public markedMemberSubject$ = new Subject<Member[]>();
   public bankRecordSubject$ = new Subject<BankRecord[]>();
   public fileUploadSubject$ = new Subject<boolean>();
@@ -35,4 +36,31 @@ export class FileService {
     return this.http.post<BankRecord[]>(this.matchTransactionsUrl, body);
   }
 
+
+  genConfirmDoc(memberId: number, fileName: string, download: boolean, sendToMember: boolean, sendToSystem: boolean, issueDate: Date): Observable<Blob> {
+    const url = this.genConfirmDocUrl + `/${memberId}`;
+    let params = new HttpParams();
+    params = params.append('download', this.convertToStr(download));
+    params = params.append('fileName', fileName);
+    params = params.append('sendToMember', this.convertToStr(sendToMember));
+    params = params.append('sendToSystem', this.convertToStr(sendToSystem));
+    params = params.append('issueDate', issueDate.toString());
+    return this.http.get(url, {
+      params,
+      responseType: 'blob'
+    });
+  }
+
+  convertToStr(v: boolean): string {
+    return v ? 'true' : 'false';
+  }
+
+  download(fileName: string,  download: boolean): Observable<Blob> {
+    let params = new HttpParams();
+    params = params.append('download', this.convertToStr(download));
+    return this.http.get(`http://localhost:8080/file-management/${fileName}`, {
+      params,
+      responseType: 'blob'
+    });
+  }
 }
