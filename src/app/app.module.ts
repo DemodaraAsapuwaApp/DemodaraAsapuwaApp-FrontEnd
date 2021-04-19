@@ -34,10 +34,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { TransactionMatchComponent } from './main-panel/evaluation-panel/transaction-match/transaction-match.component';
 import {MatSelectModule} from '@angular/material/select';
-import { DocGenerationComponent } from './main-panel/evaluation-panel/doc-generation/doc-generation.component';
+import { FinishEvalComponent } from './main-panel/evaluation-panel/doc-generation/finish-eval.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {AddReasonDialogComponent} from './shared/add-reason-dialog.component';
 import {MemAnnDialogComponent} from './shared/mem-ann-dialog.component';
+import {GenConfrmDialogComponent} from './shared/gen-confrm-dialog.component';
+import { MembershipConformationComponent } from './main-panel/reports-panel/membership-conformation/membership-conformation.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,9 @@ import {MemAnnDialogComponent} from './shared/mem-ann-dialog.component';
     AddReasonDialogComponent,
     MemAnnDialogComponent,
     TransactionMatchComponent,
-    DocGenerationComponent
+    GenConfrmDialogComponent,
+    FinishEvalComponent,
+    MembershipConformationComponent
   ],
   imports: [
     HttpClientModule,
@@ -82,7 +87,8 @@ import {MemAnnDialogComponent} from './shared/mem-ann-dialog.component';
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -37,13 +37,10 @@ export class FileService {
   }
 
 
-  genConfirmDoc(memberId: number, fileName: string, download: boolean, sendToMember: boolean, sendToSystem: boolean, issueDate: Date): Observable<Blob> {
+  genConfirmDoc(memberId: number, fileName: string, issueDate: Date): Observable<Blob> {
     const url = this.genConfirmDocUrl + `/${memberId}`;
     let params = new HttpParams();
-    params = params.append('download', this.convertToStr(download));
     params = params.append('fileName', fileName);
-    params = params.append('sendToMember', this.convertToStr(sendToMember));
-    params = params.append('sendToSystem', this.convertToStr(sendToSystem));
     params = params.append('issueDate', issueDate.toString());
     return this.http.get(url, {
       params,

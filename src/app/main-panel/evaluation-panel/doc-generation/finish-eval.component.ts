@@ -8,11 +8,11 @@ import {combineLatest} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-doc-generation',
-  templateUrl: './doc-generation.component.html',
-  styleUrls: ['./doc-generation.component.css']
+  selector: 'app-finish-eval',
+  templateUrl: './finish-eval.component.html',
+  styleUrls: ['./finish-eval.component.css']
 })
-export class DocGenerationComponent implements OnInit {
+export class FinishEvalComponent implements OnInit {
   dataSource = new MatTableDataSource<SummaryEntry>();
   displayedColumns: string[] = ['name', 'amount', 'notify'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

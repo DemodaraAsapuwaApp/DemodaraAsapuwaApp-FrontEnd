@@ -1,0 +1,27 @@
+.example-container {
+  margin-left: 2em;
+}
+.header {
+  padding-top: 15px;
+  color: mediumblue;
+}
+
+.m-t {
+  margin-top: 1em;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
+}
+
+.padding-left-4em {
+  padding-left: 4em;
+}
